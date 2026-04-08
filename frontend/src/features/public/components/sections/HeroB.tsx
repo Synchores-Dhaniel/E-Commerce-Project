@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -92,14 +93,24 @@ export default function HeroB({ data }: { data: HeroData["versionB"] }) {
             </p>
 
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 md:gap-5">
-              <button className="bg-primary hover:bg-black text-white px-6 md:px-10 py-4 md:py-6 h-auto rounded-2xl font-black text-[10px] md:text-sm uppercase tracking-widest transition-all duration-300 shadow-2xl shadow-primary/30 hover:scale-105 active:scale-95 flex items-center gap-3">
+              <Link href="/catalog" className="bg-primary hover:bg-black text-white px-6 md:px-10 py-4 md:py-6 h-auto rounded-2xl font-black text-[10px] md:text-sm uppercase tracking-widest transition-all duration-300 shadow-2xl shadow-primary/30 hover:scale-105 active:scale-95 flex items-center gap-3">
                 {ctaPrimary.text}
                 <ArrowRight size={18} />
-              </button>
+              </Link>
 
-              <button className="bg-white/10 hover:bg-white text-white hover:text-black backdrop-blur-md border border-white/30 px-6 md:px-10 py-4 md:py-6 h-auto rounded-2xl font-black text-[10px] md:text-sm uppercase tracking-widest transition-all duration-300 shadow-sm hover:scale-105 active:scale-95">
+              <Link 
+                href="/#product-catalog" 
+                onClick={(e) => {
+                  if (window.location.pathname === "/") {
+                    e.preventDefault();
+                    document.getElementById("product-catalog")?.scrollIntoView({ behavior: "smooth" });
+                    window.history.pushState(null, "", "/#product-catalog");
+                  }
+                }}
+                className="bg-white/10 hover:bg-white text-white hover:text-black backdrop-blur-md border border-white/30 px-6 md:px-10 py-4 md:py-6 h-auto rounded-2xl font-black text-[10px] md:text-sm uppercase tracking-widest transition-all duration-300 shadow-sm hover:scale-105 active:scale-95"
+              >
                 {ctaSecondary.text}
-              </button>
+              </Link>
             </div>
           </motion.div>
 

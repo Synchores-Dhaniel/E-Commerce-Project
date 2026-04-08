@@ -16,7 +16,7 @@ const IconMap: Record<string, React.ReactNode> = {
 
 const CategoryStrip = ({ categories }: { categories: CategoryData[] }) => {
   return (
-    <section className="relative z-[80] -mt-24 md:-mt-32 lg:-mt-60 mb-0 pointer-events-none">
+    <section className="relative z-[80] -mt-24 md:-mt-32 lg:-mt-60 mb-0 pointer-events-none overflow-hidden">
       <div className="w-full max-w-full px-0 md:container md:mx-auto md:px-6 pointer-events-auto">
         {/* Main Floating Container */}
         <div className="relative bg-[#F9F3EE] rounded-none md:rounded-[3.5rem] p-4 md:p-8 lg:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.1)] border-y md:border border-white/50">

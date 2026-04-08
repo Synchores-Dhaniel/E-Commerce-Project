@@ -7,11 +7,12 @@ import { cn } from "@/lib/utils";
 import { Logo } from "@/components/ui/Logo";
 
 const NavLinks = [
+  { name: "Home", href: "/#hero" },
   { name: "Products", href: "/catalog" },
   { name: "About", href: "/#about-us" },
   { name: "Omega Stories", href: "/#omega-stories" },
   { name: "Contact Us", href: "/#contact-us" },
-  { name: "Omega Affiliate", href: "/", highlight: true },
+  { name: "Omega Affiliate", href: "/#glassware", highlight: true },
 ];
 
 interface HeaderProps {
@@ -45,6 +46,20 @@ const Header = ({ forceTheme }: HeaderProps) => {
   const isDarkHero = (forceTheme || heroVersion) === "B";
   const headerTextColor = isScrolled ? "text-secondary" : (isDarkHero ? "text-white" : "text-secondary");
 
+  const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith("/#") && window.location.pathname === "/") {
+      e.preventDefault();
+      const id = href.replace("/#", "");
+      const element = document.getElementById(id);
+      if (element) {
+        // Use native scroll to avoid router delay
+        element.scrollIntoView({ behavior: "smooth" });
+        // Update hash in URL manually
+        window.history.pushState(null, "", href);
+      }
+    }
+  };
+
   return (
     <header
       className={cn(
@@ -68,6 +83,7 @@ const Header = ({ forceTheme }: HeaderProps) => {
             <Link
               key={link.name}
               href={link.href}
+              onClick={(e) => handleAnchorClick(e, link.href)}
               className={cn(
                 "text-sm font-medium transition-colors hover:text-primary flex items-center gap-1",
                 link.highlight ? "text-primary font-bold" : headerTextColor
@@ -109,7 +125,10 @@ const Header = ({ forceTheme }: HeaderProps) => {
                 "text-lg font-medium py-2 border-b border-gray-50 flex justify-between items-center",
                 link.highlight ? "text-primary" : "text-secondary"
               )}
-              onClick={() => setIsMobileMenuOpen(false)}
+              onClick={(e) => {
+                handleAnchorClick(e, link.href);
+                setIsMobileMenuOpen(false);
+              }}
             >
               {link.name}
             </Link>

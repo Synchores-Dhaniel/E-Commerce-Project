@@ -7,7 +7,7 @@ import { Review } from "@/data/reviewsData";
 
 export default function ReviewsSection({ reviews }: { reviews: Review[] }) {
   const [isHovered, setIsHovered] = useState(false);
-  const DUPED_REVIEWS = [...reviews, ...reviews, ...reviews];
+  const DUPED_REVIEWS = [...reviews, ...reviews];
 
   return (
     <section className="py-12 md:py-24 bg-[#FDFDFD] w-full overflow-hidden relative">
@@ -20,7 +20,7 @@ export default function ReviewsSection({ reviews }: { reviews: Review[] }) {
           viewport={{ once: true }}
           className="flex-shrink-0 w-full xl:w-[320px] flex flex-col items-center xl:items-start text-center xl:text-left pt-0 md:pt-4"
         >
-          <h2 className="text-3xl md:text-5xl font-serif text-secondary mb-4 md:mb-6 tracking-tight leading-tight">What People Say</h2>
+          <h2 className="text-3xl md:text-5xl font-display text-secondary mb-4 md:mb-6 tracking-tight leading-tight">What People Say</h2>
           
           <div className="flex items-center gap-3 mb-8">
             <div className="flex text-yellow-400">
@@ -49,15 +49,18 @@ export default function ReviewsSection({ reviews }: { reviews: Review[] }) {
               x: {
                 repeat: Infinity,
                 repeatType: "loop",
-                duration: 35,
+                duration: reviews.length * 10, // Dynamic duration based on count (approx 10s per set)
                 ease: "linear",
               },
             }}
-            /* CSS play-state hack if framer allows, but standard CSS is better here for pause.
-               Framer Motion doesn't directly support pausing `animate` strings on hover easily without controls. 
-               We will use an inline style workaround for the container to pause CSS. */
-            style={{ display: "flex", gap: "2rem", width: "max-content", animationPlayState: isHovered ? "paused" : "running" }}
-            className={`transition-all duration-300 ${isHovered ? 'custom-pause' : ''}`}
+            style={{ 
+              display: "flex", 
+              gap: "2rem", 
+              width: "max-content", 
+              animationPlayState: isHovered ? "paused" : "running",
+              willChange: "transform"
+            }}
+            className="transition-all duration-300"
           >
             {DUPED_REVIEWS.map((item, idx) => (
               <motion.div 

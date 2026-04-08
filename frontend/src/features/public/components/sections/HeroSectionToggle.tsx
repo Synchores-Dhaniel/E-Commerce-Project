@@ -15,7 +15,7 @@ export default function HeroSectionToggle({ data }: { data: HeroData }) {
   }, [heroVersion]);
 
   return (
-    <div className="relative w-full pointer-events-none">
+    <div id="hero" className="relative w-full pointer-events-none">
       {/* Minimal Toggle Button - High Index z-[100] */}
       <div className="absolute bottom-8 right-8 z-[100] flex items-center bg-black/40 backdrop-blur-md rounded-full shadow-lg overflow-hidden border border-white/10 p-0.5 pointer-events-auto">
         <button

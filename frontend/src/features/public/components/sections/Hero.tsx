@@ -242,7 +242,17 @@ const Hero = ({ data }: { data: HeroData["versionA"] }) => {
                 <ArrowRight size={18} />
               </Link>
 
-              <Link href="#product-catalog" className="bg-white hover:bg-neutral-50 text-secondary border border-neutral-200 px-6 md:px-10 py-4 md:py-6 h-auto rounded-2xl font-black text-[10px] md:text-sm uppercase tracking-widest transition-all duration-300 shadow-sm hover:scale-105 active:scale-95">
+              <Link 
+                href="#product-catalog" 
+                onClick={(e) => {
+                  if (window.location.pathname === "/") {
+                    e.preventDefault();
+                    document.getElementById("product-catalog")?.scrollIntoView({ behavior: "smooth" });
+                    window.history.pushState(null, "", "#product-catalog");
+                  }
+                }}
+                className="bg-white hover:bg-neutral-50 text-secondary border border-neutral-200 px-6 md:px-10 py-4 md:py-6 h-auto rounded-2xl font-black text-[10px] md:text-sm uppercase tracking-widest transition-all duration-300 shadow-sm hover:scale-105 active:scale-95"
+              >
                 {ctaSecondary.text}
               </Link>
             </div>
