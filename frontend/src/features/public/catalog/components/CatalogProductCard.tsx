@@ -39,11 +39,11 @@ const CatalogProductCard: React.FC<CatalogProductCardProps> = ({
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className="group cursor-pointer flex flex-col h-full"
+      className="group cursor-pointer flex flex-col h-full border border-neutral-100 rounded-[32px] p-4 md:p-6 transition-all duration-300"
       onClick={() => onClick(product)}
     >
       {/* Image Container */}
-      <div className="relative aspect-[4/5] md:aspect-square mb-6 bg-[#F8F8F8] rounded-[32px] overflow-hidden flex items-center justify-center p-8 transition-all duration-700 group-hover:bg-[#F2F2F2]">
+      <div className="relative aspect-[4/5] md:aspect-square mb-4 md:mb-6 bg-[#F8F8F8] rounded-[24px] overflow-hidden flex items-center justify-center transition-all duration-700 group-hover:bg-[#F2F2F2]">
         {product.badge && (
           <div className="absolute top-4 left-4 z-10 flex flex-col gap-2">
             <span className={cn(
@@ -67,7 +67,7 @@ const CatalogProductCard: React.FC<CatalogProductCardProps> = ({
       </div>
 
       {/* Details */}
-      <div className="flex flex-col flex-grow px-2">
+      <div className="flex flex-col flex-grow">
         <span className="text-[10px] font-black uppercase tracking-[0.2em] text-neutral-400 mb-2">
           {product.category?.categoryName || "Houseware"}
         </span>
@@ -92,16 +92,16 @@ const CatalogProductCard: React.FC<CatalogProductCardProps> = ({
         </div>
 
         {/* Price and Action */}
-        <div className="mt-auto flex items-center justify-between gap-4">
-          <p className="text-2xl font-black text-secondary">
+        <div className="mt-auto flex flex-col md:flex-row md:items-center justify-between gap-2 md:gap-4">
+          <p className="text-lg md:text-2xl font-black text-secondary">
             ₱{new Intl.NumberFormat().format(product.productPrice)}
           </p>
           
           <Button 
-            className="rounded-2xl h-[48px] px-6 bg-[#FFEBEB] text-primary hover:bg-primary hover:text-white shadow-none border-none normal-case tracking-normal font-bold flex items-center gap-2 group/btn transition-all duration-300"
+            className="rounded-2xl h-10 md:h-12 px-4 md:px-6 bg-[#FFEBEB] text-primary hover:bg-primary hover:text-white shadow-none border-none normal-case tracking-normal font-bold text-sm md:text-base flex items-center justify-center gap-2 group/btn transition-all duration-300"
           >
-            <ArrowRight size={18} className="transition-transform group-hover/btn:translate-x-1" />
-            Order
+            <ArrowRight size={16} className="md:size-[18px] transition-transform group-hover/btn:translate-x-1" />
+            <span>Order</span>
           </Button>
         </div>
       </div>
